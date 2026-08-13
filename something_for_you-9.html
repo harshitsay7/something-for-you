@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Something for You ✨</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;font-family:Arial,sans-serif;color:#fff;display:flex;justify-content:center;align-items:center;overflow-x:hidden;background:radial-gradient(circle at 15% 10%,#71304d,transparent 30%),radial-gradient(circle at 90% 85%,#b82f62,transparent 35%),linear-gradient(135deg,#170912,#3b1028,#761d43)}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}.glow{position:absolute;width:320px;height:320px;border-radius:50%;filter:blur(90px);opacity:.3}.g1{background:#ff5d91;top:-120px;left:-120px}.g2{background:#ff3975;right:-120px;bottom:-120px}
+.starbg{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:tw 2s infinite alternate}
+.wrap{position:relative;z-index:2;width:94%;max-width:760px;text-align:center;padding:35px 10px}
+.label{display:inline-block;padding:8px 17px;border:1px solid #ffffff33;border-radius:50px;background:#ffffff12;color:#ffffffcc;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
+h1{font:normal clamp(52px,13vw,90px)/.9 Georgia,serif;margin-bottom:22px}h1 span{display:block;color:#ffc1d5}.sub{max-width:510px;margin:auto auto 32px;color:#ffffffa8;font-size:14px;line-height:1.8}
+.card{min-height:400px;padding:35px 22px;border-radius:30px;background:#ffffff12;border:1px solid #ffffff2b;box-shadow:0 30px 80px #0006;backdrop-filter:blur(20px)}
+.envArea{margin:15px 0 28px}.env{position:relative;width:135px;height:95px;margin:auto;animation:float 3s ease-in-out infinite}.envBody{position:absolute;inset:0;background:linear-gradient(135deg,#ff9fba,#d94d78);border-radius:8px 8px 12px 12px}.flap{position:absolute;left:0;top:0;border-left:67px solid transparent;border-right:67px solid transparent;border-top:55px solid #ffb5c8}.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#fff;color:#d94d78;display:flex;align-items:center;justify-content:center}
+button{cursor:pointer;border-radius:50px;padding:13px 27px;font-weight:bold;font-size:14px;border:1px solid #ffffff33;background:#ffffff12;color:#fff}.open{background:#fff;color:#a8325d;border:0;box-shadow:0 10px 30px #0004}
+.opening,.messages,.game,.final{display:none}.opening.show,.messages.show,.game.show,.final.show{display:flex}.opening{min-height:320px;align-items:center;justify-content:center;flex-direction:column;gap:14px}.icon{width:75px;height:75px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8fab,#c83d68);font-size:28px;box-shadow:0 0 40px #ff649655;animation:pulse 1.5s infinite}.opening h2,.game h2,.final h2{font:normal 34px Georgia,serif}.opening p,.game p{color:#ffffff99;font-size:13px}
+.messages{min-height:320px;align-items:center;justify-content:center}.msg{width:100%;font-size:18px;line-height:1.9}.m1{padding:35px 24px;border-radius:22px;background:linear-gradient(135deg,#ff8fab,#c9406d);animation:m1 1s ease}.m2{padding:28px 22px 28px 38px;text-align:left;border-left:5px solid #ff6b9d;border-radius:8px 22px 22px 8px;background:linear-gradient(135deg,#fff8fb,#ffe7f1);color:#7f2854;animation:m2 1s ease}.m3{padding:55px 18px;border-radius:25px;background:linear-gradient(135deg,#f25c8d,#d83d70,#a52d58);font:clamp(27px,7vw,42px)/1.4 Georgia,serif;animation:m3 1.2s cubic-bezier(.68,-.55,.265,1.55)}
+.counter{display:none;margin-top:14px;font-size:11px;letter-spacing:2px;color:#ffffff99}.counter.show{display:block}.progress{display:none;width:90%;max-width:400px;height:2px;margin:12px auto;background:#ffffff22}.progress.show{display:block}.bar{height:100%;width:0;background:#fff}.controls{display:none;justify-content:center;gap:9px;margin-top:14px}.controls.show{display:flex}
+.game,.final{min-height:360px;flex-direction:column;justify-content:center;align-items:center}.score{color:#ffc1d5;font-size:12px;letter-spacing:2px;margin-bottom:10px}.game p{margin:8px 0 15px}.area{position:relative;width:100%;height:230px;border:1px solid #ffffff20;border-radius:22px;background:#ffffff08;overflow:hidden}.gstar{position:absolute;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;cursor:pointer;border-radius:50%;background:radial-gradient(circle,#fff,#ffc1d5 30%,transparent 70%);filter:drop-shadow(0 0 18px #ff9fbd);animation:starin .4s ease,starp 1.5s infinite}.gmsg{position:absolute;width:100%;top:50%;transform:translateY(-50%);color:#ffffffb5;font-size:13px;pointer-events:none}.gameBtn{margin-top:17px}.final .big{font-size:55px;margin-bottom:15px;animation:pulse 1.5s infinite}.final p{max-width:460px;color:#ffffffc2;line-height:1.9;font-size:15px}.final small{margin-top:20px;color:#ffffff80}.replay{margin-top:24px}
+.particle{position:fixed;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 12px #ffc1d5;pointer-events:none;z-index:20;animation:part 2.4s ease-out forwards}
+@keyframes tw{from{opacity:.15}to{opacity:1}}@keyframes float{50%{transform:translateY(-10px)}}@keyframes pulse{50%{transform:scale(1.08)}}@keyframes appear{from{opacity:0;transform:translateY(25px) scale(.95)}to{opacity:1;transform:none}}@keyframes m1{from{opacity:0;transform:translateY(50px) scale(.9)}to{opacity:1;transform:none}}@keyframes m2{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:none}}@keyframes m3{0%{opacity:0;transform:scale(.2) rotate(-8deg)}55%{opacity:1;transform:scale(1.08) rotate(2deg)}75%{transform:scale(.97) rotate(-1deg)}100%{opacity:1;transform:none}}@keyframes starin{from{opacity:0;transform:scale(.1)}to{opacity:1;transform:scale(1)}}@keyframes starp{50%{filter:drop-shadow(0 0 25px #fff)}}@keyframes part{20%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(0)}}
+@media(max-width:600px){body{align-items:flex-start}.wrap{padding:28px 8px}.card{padding:28px 14px}.msg{font-size:16px}.m1{padding:28px 18px}.m2{padding:24px 16px 24px 32px}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div></div>
+<div class="wrap">
+<div class="label">✦ A little something ✦</div>
+<h1>Something<span>for You</span></h1>
+<p class="sub">No big reason. No special occasion. Just felt like leaving a little message for you.</p>
+<div class="card">
+<div id="envArea" class="envArea"><div class="env"><div class="envBody"></div><div class="flap"></div><div class="seal">✦</div></div></div>
+<div id="openArea"><button class="open" onclick="openGift()">Open this little message</button></div>
+<div id="opening" class="opening"><div class="icon">✦</div><h2>Something for you...</h2><p>Just a little message for you</p></div>
+<div id="messages" class="messages"><div id="msg" class="msg"></div></div>
+<div id="counter" class="counter"></div>
+<div id="progress" class="progress"><div id="bar" class="bar"></div></div>
+<div id="controls" class="controls"><button onclick="back()">◀ Back</button><button id="pause" onclick="pause()">Pause</button></div>
+<div id="game" class="game">
+<div id="score" class="score">0 / 7 collected</div><h2>One last little thing ✨</h2><p>Catch the little stars.</p>
+<div id="area" class="area"><div id="gmsg" class="gmsg">Tap the glowing stars ✨</div></div>
+<button id="gameBtn" class="gameBtn" onclick="startGame()">I'm ready ✨</button>
+</div>
+<div id="final" class="final">
+<div class="big">✦</div><h2>You did it.</h2>
+<p>Okay, that was the game.<br><br>But honestly...<br><br>the real prize was just getting to see you smile.</p>
+<small>And yes... you really are amazing. ✨</small>
+<button class="replay" onclick="location.reload()">See it again ↻</button>
+</div>
+</div></div>
+<script>
+const msgs=[
+`Anisha, don't worry about anything. Whatever you've ever wanted in your life, it will come into your life soon. I truly believe in that, and I believe in you.`,
+`I didn't know about your past, whatever happened in your life, or what traumas you've been through. But one thing I know for sure is that those traumas should never come into your life again.
+
+I just want to see you happy, not just with a fake smile for the world, but genuinely happy from inside. That's all I ever wanted for you.
+
+And if you ever want to tell me something or if you ever have any problem, just remind me, pakka. I'll always be there for you.`,
+`Sahibaaaa, you are absolutely amazing. Never forget that. ✨`
+];
+const times=[7000,14000,5000],classes=['m1','m2','m3'];
+let i=0,timer,ptimer,paused=false,remaining,startTime;
+function stars(){for(let n=0;n<40;n++){let s=document.createElement('div');s.className='starbg';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*2+'s';document.querySelector('.bg').appendChild(s)}}stars();
+function openGift(){document.getElementById('openArea').style.display='none';document.getElementById('envArea').style.display='none';document.getElementById('opening').classList.add('show');particles();setTimeout(()=>{document.getElementById('opening').classList.remove('show');show()},1800)}
+function show(){clearTimeout(timer);clearInterval(ptimer);paused=false;let box=document.getElementById('messages'),m=document.getElementById('msg');classes.forEach(c=>m.classList.remove(c));m.style.animation='none';void m.offsetWidth;m.innerHTML=msgs[i].trim().replace(/\n\s*/g,'<br><br>');m.classList.add(classes[i]);box.classList.add('show');document.getElementById('counter').classList.add('show');document.getElementById('counter').textContent=`Message ${i+1} of ${msgs.length}`;document.getElementById('controls').classList.add('show');document.getElementById('progress').classList.add('show');remaining=times[i];startTime=Date.now();progress();timer=setTimeout(next,remaining)}
+function next(){if(paused)return;i++;if(i>=msgs.length){clearInterval(ptimer);document.getElementById('messages').classList.remove('show');document.getElementById('controls').classList.remove('show');document.getElementById('counter').classList.remove('show');document.getElementById('progress').classList.remove('show');document.getElementById('game').classList.add('show');particles();return}show()}
+function back(){if(i>0){i--;show()}}
+function pause(){let b=document.getElementById('pause');if(!paused){paused=true;clearTimeout(timer);clearInterval(ptimer);remaining=Math.max(500,remaining-(Date.now()-startTime));b.textContent='Play'}else{paused=false;startTime=Date.now();b.textContent='Pause';progress();timer=setTimeout(next,remaining)}}
+function progress(){clearInterval(ptimer);let bar=document.getElementById('bar'),total=remaining,start=Date.now();bar.style.width='0%';ptimer=setInterval(()=>{if(paused)return;bar.style.width=Math.min(100,(Date.now()-start)/total*100)+'%'},40)}
+let score=0,running=false,total=7;
+const texts=['Okay... you’re good at this 👀','That was quick ✨','See? I knew you could do it.','Okay Piddi, I see you 😌','You’re actually making this cute.','Almost there...','One more ✨'];
+function startGame(){if(running)return;running=true;score=0;document.getElementById('gameBtn').style.display='none';updateScore();document.getElementById('gmsg').textContent='Find the first one ✨';setTimeout(spawn,400)}
+function spawn(){if(score>=total){finish();return}let a=document.getElementById('area'),old=document.querySelector('.gstar');if(old)old.remove();let s=document.createElement('div');s.className='gstar';s.textContent='✦';s.style.left=Math.random()*Math.max(5,a.clientWidth-55)+'px';s.style.top=Math.random()*Math.max(5,a.clientHeight-55)+'px';s.onclick=collect;a.appendChild(s)}
+function collect(e){e.currentTarget.remove();score++;updateScore();document.getElementById('gmsg').textContent=texts[score-1];particles();if(score>=total)setTimeout(finish,800);else setTimeout(spawn,600)}
+function updateScore(){document.getElementById('score').textContent=score+' / '+total+' collected'}
+function finish(){running=false;let s=document.querySelector('.gstar');if(s)s.remove();document.getElementById('game').classList.remove('show');document.getElementById('final').classList.add('show');particles();setTimeout(particles,700);setTimeout(particles,1400)}
+function particles(){for(let n=0;n<15;n++){let p=document.createElement('div');p.className='particle';p.style.left=Math.random()*innerWidth+'px';p.style.top=Math.random()*innerHeight+'px';p.style.setProperty('--x',(Math.random()-.5)*240+'px');p.style.setProperty('--y',(Math.random()-.5)*240+'px');document.body.appendChild(p);setTimeout(()=>p.remove(),2500)}}
+</script>
+</body>
+</html>
